@@ -3,7 +3,9 @@ import background from "./img/bg.jpg";
 import LocExams from "./LocExams";
 import TestResult from "./TestResult";
 import AllTested from "./AllTested";
-import { Button,Container,Row,Col,Card } from 'react-bootstrap';
+import PatientInfo from "./PatientInfo";
+import CheckAns from "./CheckAns";
+//import { Button,Container,Row,Col,Card,Form } from 'react-bootstrap';
 
 const useFetch = url => {
   const [data, setData] = useState(null);
@@ -28,7 +30,7 @@ function Cards(props) {
   const [allTested, setAllTested] = useState({});
 
   function addToAllTested(n){
-    var key = n.img.medTest.testcat.name;
+    var key = n.result.medTest.testcat.name;
     if ((key in allTested)) {
       allTested[key].push(n);
     }
@@ -42,7 +44,7 @@ function Cards(props) {
   function handleShow(){setShow(true);}
 
   function checkAns(event){
-    setCheck(!check);
+    setCheck(true);
     event.preventDefault();
   }
 
@@ -50,11 +52,11 @@ function Cards(props) {
   const { data, loading } = useFetch(url);
 
   if (data && allTested){
-    const {gender,caseimg_set,age} = data[0]
+    const {gender,caseres_set,age,diagnosis} = data[0]
     //group each item by location in locDict
     var locDict = {};
-    caseimg_set.forEach(function (arrayItem) {
-      var key = arrayItem.img.medTest.loc.name;
+    caseres_set.forEach(function (arrayItem) {
+      var key = arrayItem.result.medTest.loc.name;
       //initalise as empty array
       if (!(key in locDict)) {locDict[key] =[];}
       var tmp = locDict[key];
@@ -67,15 +69,17 @@ function Cards(props) {
         {loading && (typeof data !== 'undefined')? <div>...loading</div> : 
          <div>
            <TestResult show = {show} handleClose = {handleClose} cur = {cur}/>
-           <Card>
-           <Card.Title>Patient Info</Card.Title>
-           <Card.Body>Gender: {gender} </Card.Body>
-           <Card.Body>Age: {age}</Card.Body>
-           </Card>
-           <AllTested allTested ={allTested}/>
+
+           <PatientInfo gender = {gender} age = {age}/>
+
+           <AllTested allTested ={allTested} setCur = {setCur}  handleShow = {handleShow} check = {check}/>
+
            <img className = "background" src={background} alt="background of man" ></img>
-           {Object.keys(locDict).map(key=><LocExams area ={key} res = {locDict[key]} cur = {cur}  setCur = {setCur} show = {show} handleClose = {handleClose} handleShow = {handleShow} addToAllTested = {addToAllTested}/>)}
+
+           {Object.keys(locDict).map(key=><LocExams area ={key} res = {locDict[key]}  setCur = {setCur} show = {show}  handleShow = {handleShow} addToAllTested = {addToAllTested} check = {check}/>)}
            
+          <CheckAns checkAns = {checkAns} diagnosis = {diagnosis} check = {check} />
+        
          </div>  
        }
       </div>

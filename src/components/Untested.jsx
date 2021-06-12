@@ -20,7 +20,7 @@ function Untested(props){
         >
         { props.untested.map(item => (
           <option key={item.id} value={item.id}>
-            {item.img.medTest.name}
+            {item.result.medTest.name}
           </option>
         ))}
         </select>

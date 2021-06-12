@@ -7,9 +7,9 @@ function TestResult(props) {
       props.cur ? <>
         <Modal show={props.show} onHide={props.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{props.cur.img.medTest.name} result</Modal.Title>
+            <Modal.Title>{props.cur.result.medTest.name} result</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{props.cur.img.data}</Modal.Body>
+          <Modal.Body>{props.cur.result.data}</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={props.handleClose}>
               Close

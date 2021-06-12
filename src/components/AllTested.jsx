@@ -1,14 +1,19 @@
 import React from "react";
-import { Button,Container,Row,Col,Card } from 'react-bootstrap';
+import { Button,Container,Row,Col,Card,Accordion } from 'react-bootstrap';
+import CatExams from "./CatExams";
 
 
 function AllTested(props){
+    
     console.log(props.allTested);
     return <Card style={{ width: '18rem' }}>
         <Card.Header>Completed Tests</Card.Header>
         <Card.Body>
-        {Object.keys(props.allTested).map(key=> <div>{key}</div>) }
-        
+        <Accordion>
+            
+            {Object.keys(props.allTested).map((key,index)=><CatExams  name = {key} exams = {props.allTested[key]} index = {index} setCur = {props.setCur}  handleShow = {props.handleShow} check = {props.check}/> ) }
+            
+        </Accordion>
         </Card.Body>
     </Card>
 } 

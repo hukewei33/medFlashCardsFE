@@ -17,8 +17,8 @@ return (
         <Accordion.Collapse eventKey="1">
         <Card.Body>{props.tested.length>0 ? 
         <div>
-            <ListGroup defaultActiveKey="#link1">
-                {props.tested.map(item => (<ListGroup.Item onClick={()=>clickedRes(item) } >{item.img.medTest.name} </ListGroup.Item>)) }                
+            <ListGroup >
+                {props.tested.map(item => (<ListGroup.Item onClick={()=>clickedRes(item) } >{item.result.medTest.name} </ListGroup.Item>)) }                
             </ListGroup> 
         </div>
         
