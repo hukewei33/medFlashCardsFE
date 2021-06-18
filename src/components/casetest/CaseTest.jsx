@@ -1,28 +1,15 @@
-import React ,{ useState, useEffect }from "react";
-import background from "./img/bg.jpg";
+import React ,{ useState }from "react";
+import background from "../img/bg.jpg";
 import LocExams from "./LocExams";
 import TestResult from "./TestResult";
 import AllTested from "./AllTested";
 import PatientInfo from "./PatientInfo";
 import CheckAns from "./CheckAns";
-//import { Button,Container,Row,Col,Card,Form } from 'react-bootstrap';
-
-const useFetch = url => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setData(data);
-    setLoading(false);
-  }, []);
-
-  return { data, loading };
-};
+import useFetch from "../fetchGet";
 
 
-function Cards(props) {
+
+function CaseTest(props) {
 
   const [check, setCheck] = useState(false);
   const [cur,setCur] = useState(null);
@@ -91,4 +78,4 @@ function Cards(props) {
   );
 }
 
-export default Cards;
+export default CaseTest;

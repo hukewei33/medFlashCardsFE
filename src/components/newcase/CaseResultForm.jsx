@@ -1,31 +1,16 @@
-import React ,{ useState }from "react";
-import { Button,Container,Row,Col,Card,Form } from 'react-bootstrap';
+import React from "react";
+import { Button} from 'react-bootstrap';
 import Select from 'react-select';
 import { useForm, Controller } from "react-hook-form";
+import getCookie from "../getCookie";
 
-
+//edit each caseres
 function CaseResultForm(props){
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-      }
     
     const options = props.caseres.result.medTest.result_set.map(item=>{ return {value : item , label : item.name}});
     const { control, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        //console.log(data)
         const updatedCaseRes = {result:data.result.value.id,
                                 case: props.caseId,
                                 req:data.req.value};
@@ -49,11 +34,10 @@ function CaseResultForm(props){
     }
     
 
-    return <>{props.caseres.id} caseRes
+    return <> edit {props.caseres.result.medTest.name} results
 
     <form onSubmit={handleSubmit(onSubmit)}>
     
-      <Form.Label>Exam Type</Form.Label>
       <Controller
         name="result"
         control={control}

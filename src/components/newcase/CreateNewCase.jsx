@@ -1,32 +1,17 @@
 import React ,{ useState }from "react";
-import { Button,Container,Row,Col,Card,Form } from 'react-bootstrap';
+import {Card,Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { useForm, Controller } from "react-hook-form";
 import EditCaseResults from "./EditCaseResults";
-function SelectExamType(props){
-  
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-  } 
-    
+import getCookie from "../getCookie";
+
+export default function CreateNewCase(props){
+      
     const options = props.data.map(item=>{ return {value : item.id , label : item.name}});
     const { control, handleSubmit } = useForm();
     const [caseCreated,setCaseCreated] = useState(null)
 
     const onSubmit = data => {
-      //console.log(data);
       data.examtype = data.examtype.value;
       data.gender = data.gender.value;
       console.log(data);
@@ -43,7 +28,6 @@ function SelectExamType(props){
       }).then(response => response.json())
       .then(data => {
         console.log('Success:', data);
-        console.log('id',data.id)
         setCaseCreated(data.id);
       })
       .catch((error) => {
@@ -55,9 +39,9 @@ function SelectExamType(props){
     
     
     return <div className="App">
-    
+    <Card body >
     <form onSubmit={handleSubmit(onSubmit)}>
-    
+    <h1>Create a New Case</h1>
     <Form.Label>Case Name</Form.Label>
       <Controller
         name="name"
@@ -77,11 +61,9 @@ function SelectExamType(props){
         name="age"
         control={control}
         defaultValue=""
-        render={({ field }) => <Form.Control type="number" placeholder=" enter age" {...field}/>}
+        render={({ field }) => <Form.Control type="number" min="0" placeholder=" enter age" {...field}/>}
       /> 
 
-    
-    
     <Form.Label>Gender</Form.Label>
     <Controller
         name="gender"
@@ -103,11 +85,12 @@ function SelectExamType(props){
           options={options} 
         />}
       />
-      {caseCreated?<> case {caseCreated} created. please edit case findings</>: <input type="submit" />}
+      {caseCreated?<> case {caseCreated} created. please edit case findings, maybe also add a delete case here?</>: <input type="submit" />}
     </form>
-
+    </Card>
+    {/* after new case is created, we want to edit all associated caseres, called with caseid of newly created case */}
     {caseCreated && <EditCaseResults caseId = {caseCreated}/>}
     
   </div>
 }
-export default SelectExamType;
+//export default SelectExamType;

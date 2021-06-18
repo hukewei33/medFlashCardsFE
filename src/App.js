@@ -1,27 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState, useEffect } from "react";
-import Cards from "./components/Cards.jsx";
-import NewCase from "./components/NewCase";
+import React from "react";
+import CaseTest from "./components/casetest/CaseTest.jsx";
+import NewCaseWrapper from "./components/newcase/NewCaseWrapper";
+import Login from "./components/Login";
+import useToken from './components/useToken';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button,Container,Row,Col,Card ,Form} from 'react-bootstrap';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+
 
 function App() {
-  const [mode, setMode] = useState(null);
-  function startTest(){
-    setMode('test');
+
+  const { token, setToken } = useToken();
+  if(!token) {
+    return <Login setToken={setToken} />
   }
-  function startNew(){
-    setMode('new');
-  }
+  
+
   return (
     <div className="App">
-      { mode === null && <div>
-      <Button variant="primary" onClick = {startTest}>Start Test</Button>
-      <Button variant="primary" onClick = {startNew} >Enter Case</Button></div>}
+    <h1>App wrapper</h1>
       
-      { mode === 'test' && <div><Cards/></div>}
-      { mode === 'new' && <div><NewCase/></div>}
+    <div className="wrapper">
+      <h1>Application</h1>
+      <nav>
+        <ul>
+          <li><a href="/casetest">Test yourself</a></li>
+          <li><a href="/newcase">Enter a new Case</a></li>  
+        </ul>
+      </nav>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/casetest">
+            <CaseTest/> 
+          </Route>
+          <Route path="/newcase">
+            <NewCaseWrapper />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
+     
     </div>
   );
 }

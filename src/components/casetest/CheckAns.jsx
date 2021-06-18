@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,Container,Row,Col,Card,Form } from 'react-bootstrap';
+import { Button,Row,Col,Form } from 'react-bootstrap';
 
 function CheckAns(props){
     return <Form>
