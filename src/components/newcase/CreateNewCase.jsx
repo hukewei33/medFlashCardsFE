@@ -23,6 +23,7 @@ export default function CreateNewCase(props){
         headers:{
           'Content-type':'application/json',
           'X-CSRFToken':csrftoken,
+          'Authorization': "Token "+String(props.token)
         },
         body:JSON.stringify(data)
       }).then(response => response.json())

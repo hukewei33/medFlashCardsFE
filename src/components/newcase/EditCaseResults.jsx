@@ -4,7 +4,7 @@ import useFetch from "../fetchGet";
 
 
 //use caseid of newly created to get array of accociated caseres
-function EditCaseResults(props){
+export default function EditCaseResults(props){
 
     const url = "http://127.0.0.1:8000/api/case-res/"+String(props.caseId)+"/?format=json";
     const { data, loading } = useFetch(url);
@@ -16,5 +16,3 @@ function EditCaseResults(props){
     }
     
 }
-
-export default EditCaseResults;

@@ -2,8 +2,9 @@ import './App.css';
 import React from "react";
 import CaseTest from "./components/casetest/CaseTest.jsx";
 import NewCaseWrapper from "./components/newcase/NewCaseWrapper";
-import Login from "./components/Login";
-import useToken from './components/useToken';
+import Login from "./components/account/Login";
+import Register from "./components/account/Register"
+import useToken from './components/account/useToken';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -13,7 +14,10 @@ function App() {
 
   const { token, setToken } = useToken();
   if(!token) {
-    return <Login setToken={setToken} />
+    return <>
+    <Login setToken={setToken} />
+    <Register setToken={setToken} />
+    </>
   }
   
 
@@ -35,7 +39,7 @@ function App() {
             <CaseTest/> 
           </Route>
           <Route path="/newcase">
-            <NewCaseWrapper />
+            <NewCaseWrapper token = {token} />
           </Route>
         </Switch>
       </BrowserRouter>

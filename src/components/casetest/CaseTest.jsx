@@ -16,6 +16,7 @@ function CaseTest(props) {
   const [show, setShow] = useState(false);
   const [allTested, setAllTested] = useState({});
 
+  //adds tested results into AllTested by catagory
   function addToAllTested(n){
     var key = n.result.medTest.testcat.name;
     if ((key in allTested)) {
@@ -24,7 +25,6 @@ function CaseTest(props) {
     else{
       setAllTested(pre => {return {...pre,[key]:[n]}});
     }
-    console.log(allTested);
   }
 
   function handleClose(){setShow(false);}
@@ -44,9 +44,9 @@ function CaseTest(props) {
     var locDict = {};
     caseres_set.forEach(function (arrayItem) {
       var key = arrayItem.result.medTest.loc.name;
-      //initalise as empty array
-      if (!(key in locDict)) {locDict[key] =[];}
-      var tmp = locDict[key];
+      //initalise as an array with locations coord in first 2 index and associated tests in index 2 
+      if (!(key in locDict)) {locDict[key] = [arrayItem.result.medTest.loc.top,arrayItem.result.medTest.loc.left,[]];}
+      var tmp = locDict[key][2];
       tmp.push(arrayItem);
     });
 
@@ -60,10 +60,15 @@ function CaseTest(props) {
            <PatientInfo gender = {gender} age = {age}/>
 
            <AllTested allTested ={allTested} setCur = {setCur}  handleShow = {handleShow} check = {check}/>
+            <div style={{position:"relative",backgroundImage: `url(${background})`,backgroundRepeat: "no-repeat", height: "500px",backgroundPosition:"center"   }}>
+             
+             {Object.keys(locDict).map(key=>
+             <LocExams  area ={key} top = {locDict[key][0]} left = {locDict[key][1]} res = {locDict[key][2]}  setCur = {setCur} show = {show}  handleShow = {handleShow} addToAllTested = {addToAllTested} check = {check}/>)
+             }
+            </div>
+           {/* <img className = "background" src={background} alt="background of man" ></img> */}
 
-           <img className = "background" src={background} alt="background of man" ></img>
-
-           {Object.keys(locDict).map(key=><LocExams area ={key} res = {locDict[key]}  setCur = {setCur} show = {show}  handleShow = {handleShow} addToAllTested = {addToAllTested} check = {check}/>)}
+          
            
           <CheckAns checkAns = {checkAns} diagnosis = {diagnosis} check = {check} />
         

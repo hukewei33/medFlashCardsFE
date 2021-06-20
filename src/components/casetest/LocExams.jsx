@@ -7,7 +7,9 @@ function LocExams (props){
     const [untested, SetUntested] = useState(props.res); 
     const [tested,setTested] = useState([]);
     const [value, setValue] = useState(props.res[0].id);
-    
+    const [inFocus,setInFocus] = useState("2");
+
+
     function doTest(event){
       var newCur = (untested.filter(item=>item.id == value))[0];
       var newUntested = untested.filter(item=>item.id != value);
@@ -20,8 +22,17 @@ function LocExams (props){
       event.preventDefault();
     }
 
+    function mOver(){
+      setInFocus("3");
+    }
+    function mOut(){
+      setInFocus("2");
+    }
 
-    return <div>
+
+
+
+    return <div onMouseOver = {mOver} onMouseOut= {mOut} style = {{position:"absolute", top :`${props.top}px`,left :`${props.left}px`, zIndex:`${inFocus}`}}>
   
       <Accordion>
         <Card style={{ width: '18rem' }}>
