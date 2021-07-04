@@ -1,71 +1,37 @@
 import React ,{ useState}from "react";
-import { Button,Card,Accordion,Form } from 'react-bootstrap';
-import Tested from "./Tested";
-import Untested from "./Untested";
+import { Button,OverlayTrigger,Popover } from 'react-bootstrap';
+import Untested from "./Untested1";
 
-function LocExams (props){
-    const [untested, SetUntested] = useState(props.res); 
-    const [tested,setTested] = useState([]);
-    const [value, setValue] = useState(props.res[0].id);
-    const [inFocus,setInFocus] = useState("2");
-
-
-    function doTest(event){
-      var newCur = (untested.filter(item=>item.id == value))[0];
-      var newUntested = untested.filter(item=>item.id != value);
-      setTested(prevTested => [...prevTested,newCur]);
-      props.setCur(newCur);
-      SetUntested(newUntested);
-      props.addToAllTested(newCur);
-      if (newUntested.length >0){setValue(newUntested[0].id);}
-      props.handleShow();
-      event.preventDefault();
-    }
-
-    function mOver(){
-      setInFocus("3");
-    }
-    function mOut(){
-      setInFocus("2");
-    }
-
-
-
-
-    return <div onMouseOver = {mOver} onMouseOut= {mOut} style = {{position:"absolute", top :`${props.top}px`,left :`${props.left}px`, zIndex:`${inFocus}`}}>
+export default function LocExams (props){
   
-      <Accordion>
-        <Card style={{ width: '18rem' }}>
-          
-          <Card.Header>
 
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              {props.area} tests
-            </Accordion.Toggle>
-            
-          </Card.Header>
+  if(props.res.length===0){
+    return<></>
+  }
 
-          <Accordion.Collapse eventKey="0">
-            
-            <Card.Body>
+    //sort res by loc
+    const locDict = {}
+    props.res.forEach(function (arrayItem) {
+      var key = arrayItem.result.medTest.loc.name;
+      //initalise as an empty array
+      if (!(key in locDict)) {locDict[key] = [];}
+      var tmp = locDict[key];
+      tmp.push(arrayItem);
+    });
 
-            <Accordion defaultActiveKey="3">
-              
-              <Tested tested = {tested} setCur = {props.setCur} handleShow = {props.handleShow}/>
-
-              <Untested untested = {untested} value = {value} setValue = {setValue} doTest = {doTest}/>
-
-            </Accordion>
-
-            </Card.Body>
-
-          </Accordion.Collapse>
-
-        </Card>
-      </Accordion>
-
-    </div>      
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">{props.region} tests</Popover.Title>
+        <Popover.Content>
+          {Object.keys(locDict).map((key)=><Untested locName = {key} res = {locDict[key]} doTest = {props.doTest} />)}
+        </Popover.Content>
+      </Popover>
+    );
+    
+    return <div style = {{position:"absolute", top :`${props.top}px`,left :`${props.left}px`}}>
+    <OverlayTrigger trigger={['click','foccus']}  placement="right" overlay={popover} >
+      <Button className="btn bg-transparent">{props.region}</Button> 
+    </OverlayTrigger>
+  </div>
     
 }
-
-export default LocExams;

@@ -16,7 +16,7 @@ function CatExams(props){
                 <Accordion.Collapse eventKey={props.index.toString()}>
                 <Card.Body>
                 <ListGroup>
-                  {props.exams.map(item=><ListGroup.Item onClick={()=>clickedRes(item)} action variant={props.check ? (item.req?"success":"danger") : "primary" }>
+                  {props.exams.map(item=><ListGroup.Item onClick={()=>clickedRes(item)} action >
                     {item.result.medTest.name}
                     </ListGroup.Item>)}
                  

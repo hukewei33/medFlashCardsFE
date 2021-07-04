@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
-import { Form,Alert } from 'react-bootstrap';
+import { Form,Alert,Button } from 'react-bootstrap';
 import getCookie from "../getCookie";
 // import './Login.css';
 
@@ -56,7 +56,7 @@ export default function Login(props) {
         control={control}
         render={({ field }) => <Form.Control type="password" placeholder="password" {...field} />}
       />
-      <input type="submit" />
+      <Button variant="primary" type="submit">Login </Button>
       </form>
     </div>
   )
