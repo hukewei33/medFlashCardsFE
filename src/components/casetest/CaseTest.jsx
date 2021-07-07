@@ -17,8 +17,11 @@ export default function CaseTest(props) {
   const [allTested, setAllTested] = useState({});
   const {seconds, minutes,isRunning,start,pause,reset,} = useStopwatch({ autoStart: true });
   const REGIONS = {"head":[25,375],"forearm":[200,275] ,"palm":[250,275],"chest":[100,375],"pelvis":[275,400],"legs":[400,375]};
-  //load date from API
-  const url = "http://127.0.0.1:8000/api/caserand/?format=json";
+  //if the param is 0  then we use a random test, else we use it as a case id
+  var url = "http://127.0.0.1:8000/api/caserand/?format=json";
+  if (props.testid !== "0"){
+    url = "http://127.0.0.1:8000/api/case-detail/"+props.testid+"/?format=json";
+  }
   const { data, loading ,setData} = useFetch(url);
 
   //adds tested results into AllTested by catagory
