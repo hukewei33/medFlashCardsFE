@@ -18,7 +18,7 @@ export default function CreateNewCase(props){
       console.log(data);
       var csrftoken = getCookie('csrftoken')
       var url = getURL()+'/api/case-create/'
-      var url = 'http://127.0.0.1:8000/api/case-create/'
+      // var url = 'http://127.0.0.1:8000/api/case-create/'
 
       fetch(url, {
         method:'POST',
