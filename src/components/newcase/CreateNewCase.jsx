@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { useForm, Controller } from "react-hook-form";
 import EditCaseResults from "./EditCaseResults";
 import getCookie from "../getCookie";
+import getURL from "../urlGetter" ;
 
 export default function CreateNewCase(props){
       
@@ -16,6 +17,7 @@ export default function CreateNewCase(props){
       data.gender = data.gender.value;
       console.log(data);
       var csrftoken = getCookie('csrftoken')
+      var url = getURL()+'/api/case-create/'
       var url = 'http://127.0.0.1:8000/api/case-create/'
 
       fetch(url, {
@@ -30,6 +32,7 @@ export default function CreateNewCase(props){
       .then(data => {
         console.log('Success:', data);
         setCaseCreated(data.id);
+        console.log(caseCreated);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -62,7 +65,7 @@ export default function CreateNewCase(props){
         name="age"
         control={control}
         defaultValue=""
-        render={({ field }) => <Form.Control type="number" min="0" placeholder=" enter age" {...field}/>}
+        render={({ field }) => <Form.Control type="number" min = "0" placeholder=" enter age" {...field}/>}
       /> 
 
     <Form.Label>Gender</Form.Label>

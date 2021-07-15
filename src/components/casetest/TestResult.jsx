@@ -1,7 +1,7 @@
 import React from "react";
 import { Button,Modal, Card } from 'react-bootstrap';
+
 function TestResult(props) {
-    
     
     return (
       props.cur ? <>

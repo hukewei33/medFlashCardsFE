@@ -9,6 +9,7 @@ import useFetch from "../fetchGet";
 import MyStopwatch from "./Timer";
 import { Container,Row,Col} from 'react-bootstrap';
 import { useStopwatch } from 'react-timer-hook';
+import getURL from "../urlGetter"
 
 
 export default function CaseTest(props) {
@@ -18,9 +19,9 @@ export default function CaseTest(props) {
   const {seconds, minutes,isRunning,start,pause,reset,} = useStopwatch({ autoStart: true });
   const REGIONS = {"head":[25,375],"forearm":[200,275] ,"palm":[250,275],"chest":[100,375],"pelvis":[275,400],"legs":[400,375]};
   //if the param is 0  then we use a random test, else we use it as a case id
-  var url = "http://127.0.0.1:8000/api/caserand/?format=json";
+  var url = getURL()+"/api/caserand/?format=json";
   if (props.testid !== "0"){
-    url = "http://127.0.0.1:8000/api/case-detail/"+props.testid+"/?format=json";
+    url = getURL()+"/api/case-detail/"+props.testid+"/?format=json";
   }
   const { data, loading ,setData} = useFetch(url);
 

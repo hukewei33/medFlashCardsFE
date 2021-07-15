@@ -3,6 +3,7 @@ import { Button} from 'react-bootstrap';
 import Select from 'react-select';
 import { useForm, Controller } from "react-hook-form";
 import getCookie from "../getCookie";
+import getURL from "../urlGetter" ;
 
 //edit each caseres
 function CaseResultForm(props){
@@ -16,7 +17,7 @@ function CaseResultForm(props){
                                 req:data.req.value};
         console.log(props.caseres.id,updatedCaseRes);
         var csrftoken = getCookie('csrftoken')
-        var url = 'http://127.0.0.1:8000/api/case-res-update/'+String(props.caseres.id)+'/'
+        var url = getURL()+'/api/case-res-update/'+String(props.caseres.id)+'/'
         fetch(url, {
             method:'POST',
             headers:{

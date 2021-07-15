@@ -1,9 +1,10 @@
 import React from "react";
 import useFetch from "./fetchGet";
 import { Table} from 'react-bootstrap';
+import getURL from "./urlGetter";
 
 export default function CaseIndex(){
-    const { data, loading } = useFetch("http://127.0.0.1:8000/api/case-list/?format=json");
+    const { data, loading } = useFetch(getURL()+"/api/case-list/?format=json");
     if (data && ! loading ){
         if(data.length === 0 ){
             return <>no cases in app</>

@@ -1,12 +1,13 @@
 import React from "react";
 import CaseResultForm from "./CaseResultForm";
 import useFetch from "../fetchGet";
+import getURL from "../urlGetter" ;
 
 
 //use caseid of newly created to get array of accociated caseres
 export default function EditCaseResults(props){
 
-    const url = "http://127.0.0.1:8000/api/case-res/"+String(props.caseId)+"/?format=json";
+    const url = getURL()+"/api/case-res/"+String(props.caseId)+"/?format=json";
     const { data, loading } = useFetch(url);
     if(loading || !data ){
         return <div>...loading</div>

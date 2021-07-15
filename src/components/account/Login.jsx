@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { Form,Alert,Button } from 'react-bootstrap';
 import getCookie from "../getCookie";
+import getURL from "../urlGetter"
 // import './Login.css';
 
 
@@ -11,7 +12,7 @@ export default function Login(props) {
     const onSubmit = data => {
       console.log(data);
       var csrftoken = getCookie('csrftoken')
-      fetch('http://127.0.0.1:8000/api/login/', {
+      fetch(getURL()+'/api/login/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
