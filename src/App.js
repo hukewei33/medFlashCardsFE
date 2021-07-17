@@ -5,6 +5,7 @@ import NewCaseWrapper from "./components/newcase/NewCaseWrapper";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register"
 import useToken from './components/account/useToken';
+import Logout from "./components/account/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch,useParams } from 'react-router-dom';
 import CaseIndex from "./components/caseIndex"
@@ -12,7 +13,7 @@ import CaseIndex from "./components/caseIndex"
 
 function App() {
 
-  const { token, setToken } = useToken();
+  const { token, setToken, clearToken } = useToken();
   if(!token) {
     return <>
     <Login setToken={setToken} />
@@ -33,6 +34,7 @@ function App() {
           <li><a href="/caseindex">Select a test</a></li>  
           <li><a href="/newcase">Enter a new Case</a></li>  
         </ul>
+      <Logout logout = {clearToken}/>
       </nav>
       
       <BrowserRouter>
