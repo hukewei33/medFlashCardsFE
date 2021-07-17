@@ -10,7 +10,7 @@ export default function Login(props) {
     const [badLogin,setBadLogin] = useState(false)
     const { control, handleSubmit } = useForm();
     const onSubmit = data => {
-      console.log(data);
+      //console.log(data);
       var csrftoken = getCookie('csrftoken')
       fetch(getURL()+'/api/login/', {
         method: 'POST',
