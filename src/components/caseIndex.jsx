@@ -15,11 +15,12 @@ export default function CaseIndex(){
                 <th>Case ID</th>
                 <th>Case Name</th>
                 <th>Exam Type</th>
+                <th>Edit Case</th>
                 
             </tr>
         </thead>
         <tbody>
-            {data.map(x=> <tr><td>{x.id}</td><td><a href={x.id}>{x.name}</a></td><td>{x.examtype.name}</td></tr>)}
+            {data.map(x=> <tr><td>{x.id}</td><td><a href={x.id}>{x.name}</a></td><td>{x.system.name}</td><td><a href={'caseedit/'+x.id}>{x.name}</a></td></tr>)}
         </tbody>
             
         </Table>

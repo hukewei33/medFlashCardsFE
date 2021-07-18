@@ -6,13 +6,13 @@ import getCookie from "../getCookie";
 import getURL from "../urlGetter" ;
 
 //edit each caseres
-function CaseResultForm(props){
+export default function CaseResultForm(props){
     
-    const options = props.caseres.result.medTest.result_set.map(item=>{ return {value : item , label : item.name}});
+    const options = props.caseres.finding.action.finding_set.map(item=>{ return {value : item , label : item.name}});
     const { control, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        const updatedCaseRes = {result:data.result.value.id,
+        const updatedCaseRes = {finding:data.finding.value.id,
                                 case: props.caseId,
                                 req:data.req.value};
         console.log(props.caseres.id,updatedCaseRes);
@@ -35,12 +35,12 @@ function CaseResultForm(props){
     }
     
 
-    return <> edit {props.caseres.result.medTest.name} results
+    return <> edit {props.caseres.finding.action.name} findings
 
     <form onSubmit={handleSubmit(onSubmit)}>
     
       <Controller
-        name="result"
+        name="finding"
         control={control}
         defaultValue = {options[0]}
         render={({ field }) => <Select 
@@ -69,4 +69,3 @@ function CaseResultForm(props){
     </form>
     </>
 }
-export default CaseResultForm;

@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch,useParams } from 'react-router-dom';
 import CaseIndex from "./components/caseIndex"
+import EditCaseWrapper from "./components/editCase/EditCaseWrapper"
 
 
 function App() {
@@ -40,6 +41,10 @@ function App() {
           <Route path="/newcase">
             <NewCaseWrapper token = {token} />
           </Route>
+          <Route path="/caseedit">
+            <EditCaseWrapper token = {token} />
+          </Route>
+          
           <Route path="/:id" children={<CaseTestWrapper />} />
         </Switch>
       </BrowserRouter>
@@ -50,17 +55,10 @@ function App() {
 }
 
 function CaseTestWrapper() {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
   let { id } = useParams();
-
-  return (
-    <div>
-      {/* <h3>ID: {id}</h3> */}
-      <CaseTest testid = {id}/>
-    </div>
-  );
+  return <CaseTest testid = {id}/>;
 }
+
 
 
 

@@ -12,7 +12,7 @@ export default function LocExams (props){
     //sort res by loc
     const locDict = {}
     props.res.forEach(function (arrayItem) {
-      var key = arrayItem.result.medTest.loc.name;
+      var key = arrayItem.finding.action.loc.name;
       //initalise as an empty array
       if (!(key in locDict)) {locDict[key] = [];}
       var tmp = locDict[key];

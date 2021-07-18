@@ -7,16 +7,16 @@ function TestResult(props) {
       props.cur ? <>
         <Modal show={props.show} onHide={props.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{props.cur.result.medTest.name} result</Modal.Title>
+            <Modal.Title>{props.cur.finding.action.name} finding</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Card >
-            {props.cur.result.data&& <Card.Img variant="top" src={props.cur.result.data} /> }
+            {props.cur.finding.data&& <Card.Img variant="top" src={props.cur.finding.data} /> }
            
             <Card.Body>
-              {props.cur.result.audiodata && <audio controls src={props.cur.result.audiodata} > your browser does not support the audio elem</audio>}
+              {props.cur.finding.audiodata && <audio controls src={props.cur.finding.audiodata} > your browser does not support the audio elem</audio>}
               <Card.Text>             
-                {props.cur.result.des && <>{props.cur.result.des}</>}
+                {props.cur.finding.des && <>{props.cur.finding.des}</>}
               </Card.Text>
             </Card.Body>
           </Card>

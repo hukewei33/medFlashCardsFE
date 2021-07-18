@@ -17,7 +17,7 @@ export default function CaseTest(props) {
   const [cur,setCur] = useState(null);
   const [allTested, setAllTested] = useState({});
   const {seconds, minutes,isRunning,start,pause,reset,} = useStopwatch({ autoStart: true });
-  const REGIONS = {"head":[25,375],"forearm":[200,275] ,"palm":[250,275],"chest":[100,375],"pelvis":[275,400],"legs":[400,375]};
+  const REGIONS = {"head and neck":[25,375],"upper limb":[200,275] ,"back":[250,275],"chest":[100,375],"perineum":[275,400],"abdomen":[300,300],"lower limb":[400,375]};
   //if the param is 0  then we use a random test, else we use it as a case id
   var url = getURL()+"/api/caserand/?format=json";
   if (props.testid !== "0"){
@@ -27,7 +27,7 @@ export default function CaseTest(props) {
 
   //adds tested results into AllTested by catagory
   function addToAllTested(n){
-    var key = n.result.medTest.testcat.name;
+    var key = n.finding.action.loc.region;
     if ((key in allTested)) {
       allTested[key].push(n);
     }
@@ -52,7 +52,7 @@ export default function CaseTest(props) {
     //group each item by location in regionDict
     var regionDict = {};
     data.caseres_set.forEach(function (arrayItem) {
-      var key = arrayItem.result.medTest.loc.region;
+      var key = arrayItem.finding.action.loc.region;
       //initalise as an empty array 
       if (!(key in regionDict)) {regionDict[key] = [];}
       var tmp = regionDict[key];

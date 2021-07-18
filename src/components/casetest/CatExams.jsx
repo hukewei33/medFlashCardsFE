@@ -17,7 +17,7 @@ function CatExams(props){
                 <Card.Body>
                 <ListGroup>
                   {props.exams.map(item=><ListGroup.Item onClick={()=>clickedRes(item)} action >
-                    {item.result.medTest.name}
+                    {item.finding.action.name}
                     </ListGroup.Item>)}
                  
                 </ListGroup>

@@ -13,7 +13,7 @@ export default function CreateNewCase(props){
     const [caseCreated,setCaseCreated] = useState(null)
 
     const onSubmit = data => {
-      data.examtype = data.examtype.value;
+      data.system = data.system.value;
       data.gender = data.gender.value;
       console.log(data);
       var csrftoken = getCookie('csrftoken')
@@ -33,10 +33,14 @@ export default function CreateNewCase(props){
         console.log('Success:', data);
         setCaseCreated(data.id);
         console.log(caseCreated);
+        if(data.id){
+          //window.location.href = "http://localhost:3000/caseedit/"+String(data.id);
+        }
       })
       .catch((error) => {
         console.error('Error:', error);
       });
+      //window.location.href = "http://localhost:3000/caseedit/"+String(caseCreated);
 
     };
     
@@ -80,9 +84,9 @@ export default function CreateNewCase(props){
           ]} 
         />}
       />
-      <Form.Label>Exam Type</Form.Label>
+      <Form.Label>System</Form.Label>
       <Controller
-        name="examtype"
+        name="system"
         control={control}
         render={({ field }) => <Select 
           {...field} 

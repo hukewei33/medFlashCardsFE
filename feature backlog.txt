@@ -1,0 +1,10 @@
+delete case FE
+seperate edit case into a new page
+    -edit case
+    -delete case
+    - edit case res
+
+filter case by
+-name
+-test catagory
+-by user

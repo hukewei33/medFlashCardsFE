@@ -53,11 +53,11 @@ function CheckAns(props){
       </Table>
       <p>Missed Tests</p>
       <ListGroup>
-        {props.untested.filter(item=>(!item.req)).map(item=><ListGroup.Item>{item.result.name}<>❌</></ListGroup.Item>)}
+        {props.untested.filter(item=>(item.req)).map(item=><ListGroup.Item>{item.finding.name}<>❌</></ListGroup.Item>)}
       </ListGroup>
       <p>Conducted Tests</p>
       
-        {Object.keys(props.allTested).map((key)=><><p>{key} Tests</p><ListGroup>  {props.allTested[key].map(item=><ListGroup.Item>{item.result.name}{item.req?<>✔️</>:<>❌</>}</ListGroup.Item>)}</ListGroup></>)}
+        {Object.keys(props.allTested).map((key)=><><p>{key} Tests</p><ListGroup>  {props.allTested[key].map(item=><ListGroup.Item>{item.finding.name}{item.req?<>✔️</>:<>❌</>}</ListGroup.Item>)}</ListGroup></>)}
       
       
     </Modal.Body>
