@@ -11,7 +11,7 @@ function TestResult(props) {
           </Modal.Header>
           <Modal.Body>
           <Card >
-            {props.cur.finding.data&& <Card.Img variant="top" src={props.cur.finding.data} /> }
+            {props.cur.finding.imagedata&& <Card.Img variant="top" src={props.cur.finding.imagedata} /> }
            
             <Card.Body>
               {props.cur.finding.audiodata && <audio controls src={props.cur.finding.audiodata} > your browser does not support the audio elem</audio>}
