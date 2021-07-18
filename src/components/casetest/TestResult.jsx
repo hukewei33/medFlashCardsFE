@@ -17,6 +17,7 @@ function TestResult(props) {
               {props.cur.finding.audiodata && <audio controls src={props.cur.finding.audiodata} > your browser does not support the audio elem</audio>}
               <Card.Text>             
                 {props.cur.finding.des && <>{props.cur.finding.des}</>}
+                {props.cur.finding.name && <>{props.cur.finding.name}</>}
               </Card.Text>
             </Card.Body>
           </Card>
