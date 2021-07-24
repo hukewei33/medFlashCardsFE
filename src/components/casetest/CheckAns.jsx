@@ -6,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 function CheckAns(props){
   const [show, setShow] = useState(false);
   const [diagnosis, setDiagnosis] = useState("");
+  const [untestedArray, setUntestedArray] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { control, handleSubmit } = useForm();
@@ -13,6 +14,13 @@ function CheckAns(props){
     console.log(data);
     setDiagnosis(data.diagnosis);
     props.pause();
+    const newUntestedArray = []
+    for (const [key, value] of Object.entries(props.untested)) {
+      //console.log(key, value);
+      newUntestedArray.push(...value);
+    }
+    //props.untested.forEach(elem=>newUntestedArray.push(...elem))
+    setUntestedArray(newUntestedArray)
     handleShow();
   };
 
@@ -53,7 +61,7 @@ function CheckAns(props){
       </Table>
       <p>Missed Tests</p>
       <ListGroup>
-        {props.untested.filter(item=>(item.req)).map(item=><ListGroup.Item>{item.finding.name}<>❌</></ListGroup.Item>)}
+        {untestedArray.filter(item=>(item.req)).map(item=><ListGroup.Item>{item.finding.name}<>❌</></ListGroup.Item>)}
       </ListGroup>
       <p>Conducted Tests</p>
       

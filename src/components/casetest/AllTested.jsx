@@ -11,7 +11,7 @@ function AllTested(props){
         <Card.Body>
         <Accordion>
         
-            {Object.keys(props.allTested).map((key,index)=><CatExams  name = {key} exams = {props.allTested[key]} index = {index} setCur = {props.setCur}  handleShow = {props.handleShow} /> ) }
+            {Object.keys(props.allTested).map((key,index)=><CatExams  name = {key} exams = {props.allTested[key]} index = {index} setCur = {props.setCur}   /> ) }
             
         </Accordion>
         </Card.Body>

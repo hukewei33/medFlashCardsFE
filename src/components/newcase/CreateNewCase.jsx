@@ -1,4 +1,4 @@
-import React ,{ useState }from "react";
+import React ,{ useState,useEffect }from "react";
 import {Card,Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { useForm, Controller } from "react-hook-form";
@@ -8,9 +8,28 @@ import getURL from "../urlGetter" ;
 
 export default function CreateNewCase(props){
       
-    const options = props.data.map(item=>{ return {value : item.id , label : item.name}});
+    //const options = props.data.map(item=>{ return {value : item.id , label : item.name}});
     const { control, handleSubmit } = useForm();
     const [caseCreated,setCaseCreated] = useState(null)
+
+    const url = getURL()+"/api/systems/?format=json";
+    const [data,setData] =useState();
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(url);
+          const json = await response.json();
+          //console.log(json);
+          const newData = json.map(item=>{ return {value : item.id , label : item.name}});
+          //console.log(newData);
+          setData(newData);
+        } catch (error) {
+          console.log("error", error);
+        }
+      };
+  
+      fetchData();
+  }, []);
 
     const onSubmit = data => {
       data.system = data.system.value;
@@ -90,7 +109,7 @@ export default function CreateNewCase(props){
         control={control}
         render={({ field }) => <Select 
           {...field} 
-          options={options} 
+          options={data} 
         />}
       />
       {caseCreated?<> case {caseCreated} created. please edit case findings, maybe also add a delete case here?</>: <input type="submit" />}

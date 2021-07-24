@@ -20,7 +20,7 @@ export default function CaseIndex(){
             </tr>
         </thead>
         <tbody>
-            {data.map(x=> <tr><td>{x.id}</td><td><a href={x.id}>{x.name}</a></td><td>{x.system.name}</td><td><a href={'caseedit/'+x.id}>{x.name}</a></td></tr>)}
+            {data.map(x=> <tr><td>{x.id}</td><td><a href={x.id}>{x.name}</a></td><td>{x.system.name}</td><td><a href={'/caseedit/'+x.id}>{x.name}</a></td></tr>)}
         </tbody>
             
         </Table>

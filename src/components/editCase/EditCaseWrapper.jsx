@@ -1,4 +1,5 @@
 import React from "react";
+import EditCaseResults from "../newcase/EditCaseResults"; 
 import {
     Switch,
     Route,
@@ -27,6 +28,7 @@ function EditCase(props) {
         <h1> work in progress</h1>
         <h3>edit {caseId}</h3>
         <DeleteCase token = {props.token} id = {caseId}/>
+        <EditCaseResults caseId = {caseId}/>
       </div>
     );
   }

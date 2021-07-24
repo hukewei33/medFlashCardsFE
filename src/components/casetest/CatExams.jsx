@@ -4,7 +4,6 @@ import { Button,Card,ListGroup,Accordion } from 'react-bootstrap';
 function CatExams(props){
   function clickedRes(res){
     props.setCur(res);
-    props.handleShow();
 }
 
     return <Card>

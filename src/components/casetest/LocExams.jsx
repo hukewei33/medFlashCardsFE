@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button,OverlayTrigger,Popover } from 'react-bootstrap';
 import Untested from "./Untested1";
 
 export default function LocExams (props){
-  
+  const [locDict, setlocDict] = useState({});
+  useEffect(() => {
+    //sort res by loc
+    const locDictNew = {}
+    props.res.forEach(function (arrayItem) {
+      var key = arrayItem.finding.action.loc.name;
+      //initalise as an empty array
+      if (!(key in locDictNew)) {locDictNew[key] = [];}
+      var tmp = locDictNew[key];
+      tmp.push(arrayItem);
+    });
+    setlocDict(locDictNew)
+  },[props.res]); // Only re-run the effect if props.res changes
 
   if(props.res.length===0){
     return<></>
   }
-
-    //sort res by loc
-    const locDict = {}
-    props.res.forEach(function (arrayItem) {
-      var key = arrayItem.finding.action.loc.name;
-      //initalise as an empty array
-      if (!(key in locDict)) {locDict[key] = [];}
-      var tmp = locDict[key];
-      tmp.push(arrayItem);
-    });
 
     const popover = (
       <Popover id="popover-basic">
