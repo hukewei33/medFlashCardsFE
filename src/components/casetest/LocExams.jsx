@@ -23,10 +23,11 @@ export default function LocExams (props){
 
     const popover = (
       <Popover id="popover-basic">
-        <Popover.Title as="h3">{props.region} tests</Popover.Title>
-        <Popover.Content>
+        <Popover.Header  as="h3">{props.region} tests</Popover.Header>
+        
+        <Popover.Body>
           {Object.keys(locDict).map((key)=><Untested locName = {key} res = {locDict[key]} doTest = {props.doTest} />)}
-        </Popover.Content>
+        </Popover.Body>
       </Popover>
     );
     

@@ -46,7 +46,7 @@ export default function EditCaseResults(props){
                       
           { Object.entries(data).map((item,idx)=><>
           <Accordion.Item eventKey={String(idx)}>
-            < Accordion.Header>{item[0]} region results </Accordion.Header>
+            < Accordion.Header>{item[0]} region findings </Accordion.Header>
             {/* {String(idx)}{item[0]} region results  */}
             <Accordion.Body>
             <Row xs={1} md={4} className="g-4">

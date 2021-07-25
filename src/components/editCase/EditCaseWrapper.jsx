@@ -25,9 +25,9 @@ function EditCase(props) {
   
     return (
       <div>
-        <h1> work in progress</h1>
-        <h3>edit {caseId}</h3>
+        <h2>{caseId}</h2>
         <DeleteCase token = {props.token} id = {caseId}/>
+        <h3>Edit {caseId} results</h3>
         <EditCaseResults caseId = {caseId}/>
       </div>
     );

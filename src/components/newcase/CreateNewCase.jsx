@@ -1,5 +1,5 @@
 import React ,{ useState,useEffect }from "react";
-import {Card,Form } from 'react-bootstrap';
+import {Card,Form ,Button} from 'react-bootstrap';
 import Select from 'react-select';
 import { useForm, Controller } from "react-hook-form";
 import EditCaseResults from "./EditCaseResults";
@@ -53,7 +53,7 @@ export default function CreateNewCase(props){
         setCaseCreated(data.id);
         console.log(caseCreated);
         if(data.id){
-          //window.location.href = "http://localhost:3000/caseedit/"+String(data.id);
+          window.location.href = "http://localhost:3000/caseedit/"+String(data.id)+"/";
         }
       })
       .catch((error) => {
@@ -112,11 +112,12 @@ export default function CreateNewCase(props){
           options={data} 
         />}
       />
-      {caseCreated?<> case {caseCreated} created. please edit case findings, maybe also add a delete case here?</>: <input type="submit" />}
+      <Button variant="primary" type="submit">Submit</Button>
+      {/* {caseCreated?<> case {caseCreated} created. please edit case findings, maybe also add a delete case here?</>: <input type="submit" />} */}
     </form>
     </Card>
     {/* after new case is created, we want to edit all associated caseres, called with caseid of newly created case */}
-    {caseCreated && <EditCaseResults caseId = {caseCreated}/>}
+    {/* {caseCreated && <EditCaseResults caseId = {caseCreated}/>} */}
     
   </div>
 }
