@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,Card,ListGroup,Accordion } from 'react-bootstrap';
+import { ListGroup,Accordion } from 'react-bootstrap';
 
 function CatExams(props){
   function clickedRes(res){

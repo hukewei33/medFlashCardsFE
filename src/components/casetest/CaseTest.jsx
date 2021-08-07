@@ -1,24 +1,26 @@
 import React ,{ useState,useEffect }from "react";
-import background from "../img/bg.jpg";
+import Background from "../img/bg1.png";
 import LocExams from "./LocExams";
 //import TestResult from "./TestResult";
 import AllTested from "./AllTested";
 import PatientInfo from "./PatientInfo";
 import CheckAns from "./CheckAns";
-import useFetch from "../fetchGet";
 import MyStopwatch from "./Timer";
 import { Container,Row,Col} from 'react-bootstrap';
 import { useStopwatch } from 'react-timer-hook';
 import getURL from "../urlGetter";
-import ShowFinding from "./ShowFinding"
+import ShowFinding from "./ShowFinding";
+import Actions from "./Actions";
 
 
 export default function CaseTest(props) {
 
   const [cur,setCur] = useState(null);
   const [allTested, setAllTested] = useState({});
+  const [curActions,setCurActions]=useState(null);
+  const [curRegion,setCurRegion]= useState(null);
   const {seconds, minutes,isRunning,start,pause,reset,} = useStopwatch({ autoStart: true });
-  const REGIONS = {"head and neck":[25,375],"upper limb":[200,275] ,"back":[250,275],"chest":[100,375],"perineum":[275,400],"abdomen":[300,300],"lower limb":[400,375]};
+  const REGIONS = {"head":[90,238],"neck":[200,238],"left upper limb":[300,150] ,"right upper limb":[300,325] ,"back":[250,275],"left chest":[260,200],"right chest":[260,280],"perineum":[275,400],"abdomen":[300,300],"left lower limb":[780,180],"right lower limb":[780,300]};
   
   
   //get data from API
@@ -42,6 +44,7 @@ export default function CaseTest(props) {
         caseres_set.forEach(function(arrayItem){actionIdSet.add(arrayItem.finding.action.id)})
         //get a copy of all default findings from session storage
         const defFindingsAll = props.defData;
+        
         //use set to filter findings which already exist in caseres_set
         const defFindings = defFindingsAll.filter(item => ! (actionIdSet.has(item.action.id )))
         //init requried test
@@ -68,12 +71,11 @@ export default function CaseTest(props) {
     };
 
     fetchData();
-    
+    console.log(props.defData);
 
-  }, []);
+  }, [props.defData,props.testid]);
 
   
-
   //adds tested results into AllTested by catagory
   function addToAllTested(n){
     var key = n.finding.action.loc.region;
@@ -84,57 +86,9 @@ export default function CaseTest(props) {
       setAllTested(pre => {return {...pre,[key]:[n]}});
     }
   }
-  // useEffect(() => {
-  //   const {gender,age,diagnosis,name} = data
-  //   //get a set of all action ids for case
-  //   const actionIdSet = new Set()
-  //   data.caseres_set.forEach(function(arrayItem){actionIdSet.add(arrayItem.finding.action.id)})
-  //   //get a copy of all default findings from session storage
-  //   const defFindingsAll = props.defData;
-  //   //console.log(defFindingsAll)
-  //   //use set to filter findings which already exist in caseres_set
-  //   const defFindings = defFindingsAll.filter(item => ! (actionIdSet.has(item.action.id )))
-  //   //console.log(defFindings)
-  //   //append to other default findings to caseres_set
-  //   const defFindingsWithRes = defFindingsAll.map(function(item){return {req:false,finding:item}})
-  //   data.caseres_set.push(...defFindingsWithRes);
-
-  //   //group each item by location in regionDict
-  //   var regionDict = {};
-  //   data.caseres_set.forEach(function (arrayItem) {
-  //     var key = arrayItem.finding.action.loc.region;
-  //     //initalise as an empty array 
-  //     if (!(key in regionDict)) {regionDict[key] = [];}
-  //     var tmp = regionDict[key];
-  //     tmp.push(arrayItem);
-  //   });
-  // }, []);
 
   if (untested && allTested){
-    // const {gender,age,diagnosis,name} = data
-    // //get a set of all action ids for case
-    // const actionIdSet = new Set()
-    // data.caseres_set.forEach(function(arrayItem){actionIdSet.add(arrayItem.finding.action.id)})
-    // //get a copy of all default findings from session storage
-    // const defFindingsAll = props.defData;
-    // //console.log(defFindingsAll)
-    // //use set to filter findings which already exist in caseres_set
-    // const defFindings = defFindingsAll.filter(item => ! (actionIdSet.has(item.action.id )))
-    // //console.log(defFindings)
-    // //append to other default findings to caseres_set
-    // const defFindingsWithRes = defFindingsAll.map(function(item){return {req:false,finding:item}})
-    // data.caseres_set.push(...defFindingsWithRes);
-
-    // //group each item by location in regionDict
-    // var regionDict = {};
-    // data.caseres_set.forEach(function (arrayItem) {
-    //   var key = arrayItem.finding.action.loc.region;
-    //   //initalise as an empty array 
-    //   if (!(key in regionDict)) {regionDict[key] = [];}
-    //   var tmp = regionDict[key];
-    //   tmp.push(arrayItem);
-    // });
-
+  
     //once a test is done, move that test into tested and remove it from data, also set that test to cur for viewing
     function doTest(test){
       // var newCur = (data.caseres_set.filter(item=>item.finding.id === test.finding.id))[0];
@@ -156,14 +110,15 @@ export default function CaseTest(props) {
         {/* <TestResult show = {show} handleClose = {handleClose} cur = {cur}/> */}
         <Row>
           <Col>
-            <div style={{position:"relative",backgroundImage: `url(${background})`,backgroundRepeat: "no-repeat", height: "900px",backgroundPosition:"left top"   }}>             
+            <div style={{position:"relative",backgroundImage: `url(${Background})`,backgroundRepeat: "no-repeat", height: "1000px",backgroundPosition:"left top"   }}>             
               {Object.keys(REGIONS).map(key=>
-                <LocExams  region ={key} top = {REGIONS[key][0]} left = {REGIONS[key][1]} res = {untested[key]?untested[key]:[]}  setCur = {setCur}  addToAllTested = {addToAllTested}  doTest = {doTest}/>)
+                <LocExams  region ={key} top = {REGIONS[key][0]} left = {REGIONS[key][1]} res = {untested[key]?untested[key]:[]}  setCurRegion = {setCurRegion}/>)
               }
             </div> 
           </Col>
           <Col sm ={3}>
           <ShowFinding cur = {cur}/>
+          <Actions untested = {untested} region = {curRegion} doTest = {doTest}/>
           </Col>
           <Col sm ={3}>
           <MyStopwatch seconds={seconds} minutes = {minutes} isRunning ={isRunning }start = {start} pause={pause} reset = {reset}/>

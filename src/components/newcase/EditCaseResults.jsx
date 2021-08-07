@@ -1,6 +1,6 @@
 import React ,{ useState,useEffect }from "react";
 import CaseResultForm from "./CaseResultForm";
-import useFetch from "../fetchGet";
+//import useFetch from "../fetchGet";
 import getURL from "../urlGetter" ;
 import { Button,Row,Col,Accordion} from 'react-bootstrap';
 
@@ -8,34 +8,47 @@ import { Button,Row,Col,Accordion} from 'react-bootstrap';
 //use caseid of newly created to get array of accociated caseres
 export default function EditCaseResults(props){
 
-    const url = getURL()+"/api/case-res/"+String(props.caseId)+"/?format=json";
-    const [data,setData] =useState();
+    //const url = getURL()+"/api/case-res/"+String(props.caseId)+"/?format=json";
+    const [data,setData] =useState(null);
     const [clicked,setClicked] =useState(0);
    
-
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch(url);
-            const json = await response.json();
-            //group by regions
-             //group each item by location in regionDict
-            const resByRegion = {};
-            json.caseres_set.forEach(function (arrayItem) {
-              var key = arrayItem.finding.action.loc.region;
-              //initalise as an empty array 
-              if (!(key in resByRegion)) {resByRegion[key] = [];}
-              var tmp = resByRegion[key];
-              tmp.push(arrayItem);
-            });
-            setData(resByRegion);
-          } catch (error) {
-            console.log("error", error);
-          }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //       try {
+    //         const response = await fetch(url);
+    //         const json = await response.json();
+    //         //group by regions
+    //          //group each item by location in regionDict
+    //         const resByRegion = {};
+    //         json.caseres_set.forEach(function (arrayItem) {
+    //           var key = arrayItem.finding.action.loc.region;
+    //           //initalise as an empty array 
+    //           if (!(key in resByRegion)) {resByRegion[key] = [];}
+    //           var tmp = resByRegion[key];
+    //           tmp.push(arrayItem);
+    //         });
+    //         setData(resByRegion);
+    //       } catch (error) {
+    //         console.log("error", error);
+    //       }
+    //     };
     
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, [url]);
+    useEffect(() => {
+      const resByRegion = {};
+      props.data.forEach(function (arrayItem) {
+        var key = arrayItem.finding.action.loc.region;
+        //initalise as an empty array 
+        if (!(key in resByRegion)) {resByRegion[key] = [];}
+        var tmp = resByRegion[key];
+          tmp.push(arrayItem);
+        });
+      setData(resByRegion);
+  
+  }, [props.data]);
+
+
     //const { data, loading } = useFetch(url);
     if(!data ){
         return <div>...loading</div>

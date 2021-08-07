@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,Modal, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 export default function ShowFindings(props){
     if(props.cur){

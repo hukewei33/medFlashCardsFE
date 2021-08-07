@@ -1,7 +1,7 @@
 import React from "react";
 import getURL from "../urlGetter"
-import {Card,Form,Button } from 'react-bootstrap';
-import getCookie from "../getCookie";
+import {Button } from 'react-bootstrap';
+//import getCookie from "../getCookie";
 
 export default function DeleteCase(props){
     function buttonHandle(){

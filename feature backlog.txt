@@ -1,10 +1,15 @@
 delete case FE
 seperate edit case into a new page
     -edit case
-    -delete case
-    - edit case res
+    -delete case [done]
+    - edit case res [done]
 
 filter case by
 -name
 -test catagory
 -by user
+
+-remove test random endpoint
+- create a get get random id function on index page to link to test page 
+
+- fix popover overing each other 

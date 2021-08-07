@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { Form,Alert,Button } from 'react-bootstrap';
 import getCookie from "../getCookie";
 import getURL from "../urlGetter"
-import getAllDefaultFindings from "./getAllDefaultFindings"
 // import './Login.css';
 
 

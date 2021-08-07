@@ -9,6 +9,8 @@ import getURL from "../urlGetter" ;
 export default function CaseResultForm(props){
     
     const options = props.caseres.finding.action.finding_set.map(item=>{ return {value : item , label : item.name}});
+    const getOriginalFinding = (elem)=> elem.value.id === props.caseres.finding.id
+    const defIndex = options.findIndex(getOriginalFinding)
     const { control, handleSubmit } = useForm();
 
     const onSubmit = data => {
@@ -19,7 +21,7 @@ export default function CaseResultForm(props){
         var csrftoken = getCookie('csrftoken')
         var url = getURL()+'/api/case-res-update/'+String(props.caseres.id)+'/'
         fetch(url, {
-            method:'POST',
+            method:'PATCH',
             headers:{
               'Content-type':'application/json',
               'X-CSRFToken':csrftoken,
@@ -51,10 +53,10 @@ export default function CaseResultForm(props){
       <Controller
         name="finding"
         control={control}
-        defaultValue = {options[0]}
+        defaultValue = {options[defIndex]}
         render={({ field }) => <Select 
           {...field} 
-          defaultValue={options[0]}
+          defaultValue={options[defIndex]}
           options={options} 
         />}
       />
