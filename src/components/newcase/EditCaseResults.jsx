@@ -1,7 +1,7 @@
 import React ,{ useState,useEffect }from "react";
 import CaseResultForm from "./CaseResultForm";
 //import useFetch from "../fetchGet";
-import getURL from "../urlGetter" ;
+//import getURL from "../urlGetter" ;
 import { Button,Row,Col,Accordion} from 'react-bootstrap';
 
 

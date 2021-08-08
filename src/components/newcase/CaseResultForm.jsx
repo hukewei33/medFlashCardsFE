@@ -41,7 +41,7 @@ export default function CaseResultForm(props){
     },[props.clicked]);
 
     const [show, setShow] = useState(false);
-    return<Card style={{ width: '18rem' }}> edit {props.caseres.finding.action.name} findings
+    return<Card style={{ width: '18rem' }}> {props.caseres.finding.action.name} findings
     {show && <Alert variant="primary" onClose={() => setShow(false)} dismissible>
         <p>
         {props.caseres.finding.action.name} finding updated

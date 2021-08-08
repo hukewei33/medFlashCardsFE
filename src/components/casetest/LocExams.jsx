@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Button,OverlayTrigger,Popover,Row,Col, Container} from 'react-bootstrap';
-import Untested from "./Untested1";
+import React from "react";
+import { Button} from 'react-bootstrap';
+//import Untested from "./Untested1";
 
 export default function LocExams (props){
   // const [locDict, setlocDict] = useState({});

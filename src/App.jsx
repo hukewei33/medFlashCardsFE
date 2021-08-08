@@ -1,7 +1,7 @@
 //import './App.css';
 import React ,{ useState,useEffect }from "react";
 import CaseTest from "./components/casetest/CaseTest.jsx";
-import NewCaseWrapper from "./components/newcase/NewCaseWrapper";
+//import NewCaseWrapper from "./components/newcase/NewCaseWrapper";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register"
 import useToken from './components/account/useToken';
@@ -10,7 +10,8 @@ import Nav from "./components/Navbar"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch,useParams } from 'react-router-dom';
 import CaseIndex from "./components/caseIndex"
-import EditCaseWrapper from "./components/editCase/EditCaseWrapper"
+import EditCaseWrapper from "./components/editCase/EditCaseWrapper";
+import CreateNewCase from "./components/newcase/CreateNewCase";
 //import useFetch from"./components/fetchGet";
 import getURL from "./components/urlGetter"
 
@@ -38,7 +39,7 @@ function App() {
   if(!token) {
     return <>
     <Login setToken={setToken} />
-    <Register setToken={setToken} />
+    {/* <Register setToken={setToken} /> */}
     </>
   }
   
@@ -51,19 +52,25 @@ function App() {
 
       <Nav clearToken = {clearToken}/>
       
+      
       <BrowserRouter>
         <Switch>
+        
           <Route path="/caseindex">
             <CaseIndex/>
           </Route>
           <Route path="/newcase">
-            <NewCaseWrapper token = {token} />
+          <CreateNewCase   token = {token} default = {null}/>
+            {/* <NewCaseWrapper token = {token} /> */}
           </Route>
           <Route path="/caseedit">
             <EditCaseWrapper token = {token} />
           </Route>
-          
           <Route path="/:id" children={<CaseTestWrapper data = {data}/>} />
+          <Route path="/">
+          <h2>This is still a work in progress application, please offer your feedback to Juntao and consider donating to support this project!</h2>
+          </Route>
+
         </Switch>
       </BrowserRouter>
     </div>

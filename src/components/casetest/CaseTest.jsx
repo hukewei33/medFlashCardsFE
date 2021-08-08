@@ -17,7 +17,7 @@ export default function CaseTest(props) {
 
   const [cur,setCur] = useState(null);
   const [allTested, setAllTested] = useState({});
-  const [curActions,setCurActions]=useState(null);
+  //const [curActions,setCurActions]=useState(null);
   const [curRegion,setCurRegion]= useState(null);
   const {seconds, minutes,isRunning,start,pause,reset,} = useStopwatch({ autoStart: true });
   const REGIONS = {"head":[90,238],"neck":[200,238],"left upper limb":[300,150] ,"right upper limb":[300,325] ,"back":[250,275],"left chest":[260,200],"right chest":[260,280],"perineum":[275,400],"abdomen":[300,300],"left lower limb":[780,180],"right lower limb":[780,300]};
